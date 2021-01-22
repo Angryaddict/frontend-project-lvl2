@@ -2,13 +2,20 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
   "description": "[![Actions Status](https://github.com/Angryaddict/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/Angryaddict/frontend-project-lvl2/actions)",
   "main": "gendiff.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -24,8 +31,10 @@
     "commander": "^7.0.0"
   },
   "devDependencies": {
+    "@jest/globals": "^26.6.2",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3"
   }
 }

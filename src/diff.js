@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import getData from './getData.js';
 
 export default function diff(filepath1, filepath2) {
