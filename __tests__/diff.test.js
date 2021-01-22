@@ -1,4 +1,3 @@
-import { test, expect } from 'jest';
 // eslint-disable-next-line import/extensions
 import getData from '../src/getData.js';
 
@@ -9,6 +8,12 @@ test('getData', () => {
     proxy: '123.234.53.22',
     follow: false,
   };
+  const file2Data = {
+    timeout: 20,
+    verbose: true,
+    host: 'hexlet.io',
+  };
 
-  expect(getData('../files/file1')).toEqual(file1Data);
+  expect(getData('files/file1.json')).toEqual(file1Data);
+  expect(getData('files/file2.json')).toEqual(file2Data);
 });
