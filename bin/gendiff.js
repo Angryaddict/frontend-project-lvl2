@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import { Command } from 'commander';
 // eslint-disable-next-line import/extensions
 import diff from '../src/diff.js';

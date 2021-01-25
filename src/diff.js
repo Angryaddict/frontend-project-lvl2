@@ -25,7 +25,6 @@ export default function diff(filepath1, filepath2) {
     acc[`+ ${key}`] = obj2[key];
     return acc;
   }, {});
-  const arr = Object.entries(result);
-  const str = arr.map(([key, value]) => `${key}: ${value}`).join('\n');
-  return str;
+  const str = JSON.stringify(result, null, ' ');
+  return str.replace(/[",]/g, '');
 }
