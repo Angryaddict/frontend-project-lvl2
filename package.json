@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/Angryaddict/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^7.0.0"
+    "commander": "^7.0.0",
+    "js-yaml": "^4.0.0"
   },
   "devDependencies": {
     "@jest/globals": "^26.6.2",
