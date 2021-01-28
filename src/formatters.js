@@ -1,45 +1,34 @@
-/* eslint-disable import/extensions */
-import diff from './diff.js';
-
 function open(obj, tab) {
   if (typeof obj === 'object' && obj !== null) {
     const keys = Object.keys(obj);
     const mapped = keys.map((key) => {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
-        console.log(obj[key], tab);
-        return `${'    '.repeat(tab)}    ${key}: {\n${open(obj[key], tab + 1)}@\n    ${'    '.repeat(tab)}}`;
+        return `    ${'    '.repeat(tab)}${key}: ${open(obj[key], tab + 1)}`;
       }
-      console.log('res', obj[key], tab);
-      return `\n    ${'  * '.repeat(tab + 1)}${key}: ${obj[key]}\n${'    '.repeat(tab + 1)}`;
+      return `    ${'    '.repeat(tab)}${key}: ${obj[key]}`;
     });
-
-    return `!{${mapped.join('\n')}}!`;
+    return `{\n${mapped.join('\n')}\n${'    '.repeat(tab)}}`;
   }
   return obj;
 }
+
+const map = {
+  changed: (nod, depth) => `  - ${nod.name}: ${open(nod.oldValue, depth + 1)}\n  ${'    '.repeat(depth)}+ ${nod.name}: ${open(nod.value, depth)}`,
+  added: (nod, depth) => `  + ${nod.name}: ${open(nod.value, depth + 1)}`,
+  deleted: (nod, depth) => `  - ${nod.name}: ${open(nod.value, depth + 1)}`,
+  unchanged: (nod, depth) => `    ${nod.name}: ${open(nod.value, depth + 1)}`,
+};
+
 export default function stylish(tree) {
-  function iter(interTree, depth) {
+  function iter(interTree, initDepth) {
     return interTree
       .map((node) => {
-        const map = {
-          changed: `  - ${node.name}: ${open(node.oldValue, depth)}\n  ${'    '.repeat(depth)}+ ${node.name}: ${open(
-            node.value,
-            depth
-          )}`,
-          added: `  + ${node.name}: ${open(node.value, depth)}`,
-          deleted: `  - ${node.name}: ${open(node.value, depth)}`,
-          unchanged: `    ${node.name}: ${open(node.value, depth)}`,
-        };
         if ('children' in node) {
-          return `${'    '.repeat(depth)}    ${node.name}: {\n${iter(node.children, depth + 1)}\n    ${'    '.repeat(
-            depth
-          )}}`;
+          return `${'    '.repeat(initDepth)}    ${node.name}: {\n${iter(node.children, initDepth + 1)}\n    ${'    '.repeat(initDepth)}}`;
         }
-        return `${'    '.repeat(depth)}${map[node.status]}`;
+        return `${'    '.repeat(initDepth)}${map[node.status](node, initDepth)}`;
       })
       .join('\n');
   }
-  return iter(tree, 0);
+  return `{\n${iter(tree, 0)}\n}`;
 }
-const dif = diff('__fixtures__/file1.json', '__fixtures__/file2.json');
-console.log(stylish(dif));
