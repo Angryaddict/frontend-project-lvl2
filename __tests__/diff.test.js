@@ -40,25 +40,74 @@ test('getData relative path yaml', () => {
 
 test('diff json', () => {
   const str = `{
- - car: mazda
- - checkengine: false
- + checkengine: true
- + country: japan
- - engine: 2
- + engine: 25
- - user: Eugeny
+    - car: mazda
+    - checkengine: false
+    + checkengine: true
+    + country: japan
+    - engine: 2
+    + engine: 25
+    - user: Eugeny
 }`;
   expect(diff('__fixtures__/testFile1.json', '__fixtures__/testFile2.json')).toEqual(str);
 });
 
 test('diff yaml', () => {
   const str = `{
- - follow: false
-   host: hexlet.io
- - proxy: 123.234.53.22
- - timeout: 50
- + timeout: 20
- + verbose: true
+    - follow: false
+      host: hexlet.io
+    - proxy: 123.234.53.22
+    - timeout: 50
+    + timeout: 20
+    + verbose: true
 }`;
   expect(diff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml')).toEqual(str);
+});
+
+test('diff recoursive', () => {
+  const str = `{
+      common: {
+        + follow: false
+          setting1: Value 1
+        - setting2: 200
+        - setting3: true
+        + setting3: null
+        + setting4: blah blah
+        + setting5: {
+            key5: value5
+        }
+          setting6: {
+              doge: {
+                - wow: 
+                + wow: so much
+            }
+              key: value
+            + ops: vops
+        }
+    }
+      group1: {
+        - baz: bas
+        + baz: bars
+          foo: bar
+        - nest: {
+            key: value
+        }
+        + nest: str
+    }
+    - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+    + group3: {
+        fee: 100500
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+    }
+}`;
+  expect(diff('__fixtures__/file1.json', '__fixtures__/file2.json')).toEqual(str);
+  expect(diff('__fixtures__/file1Rec.yml', '__fixtures__/file2Rec.yml')).toEqual(str);
 });
