@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/extensions
 import getData from './getData.js';
 
-export default function diff1(filepath1, filepath2) {
+export default function diff(filepath1, filepath2) {
   const o1 = getData(filepath1);
   const o2 = getData(filepath2);
   function compare(obj1, obj2) {
