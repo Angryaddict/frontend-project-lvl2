@@ -1,3 +1,3 @@
 export default function json(tree) {
-  return tree;
+  return JSON.stringify(tree);
 }
