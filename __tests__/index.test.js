@@ -60,11 +60,15 @@ const strStylish = `{
         }
     }
 }`;
+const strJson = '[{"name":"common","children":[{"name":"follow","status":"added","value":false},{"name":"setting1","status":"unchanged","value":"Value 1"},{"name":"setting2","status":"deleted","value":200},{"name":"setting3","status":"changed","value":null,"oldValue":true},{"name":"setting4","status":"added","value":"blah blah"},{"name":"setting5","status":"added","value":{"key5":"value5"}},{"name":"setting6","children":[{"name":"doge","children":[{"name":"wow","status":"changed","value":"so much","oldValue":""}]},{"name":"key","status":"unchanged","value":"value"},{"name":"ops","status":"added","value":"vops"}]}]},{"name":"group1","children":[{"name":"baz","status":"changed","value":"bars","oldValue":"bas"},{"name":"foo","status":"unchanged","value":"bar"},{"name":"nest","status":"changed","value":"str","oldValue":{"key":"value"}}]},{"name":"group2","status":"deleted","value":{"abc":12345,"deep":{"id":45}}},{"name":"group3","status":"added","value":{"fee":100500,"deep":{"id":{"number":45}}}}]';
 test('stylish json', () => {
   expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json')).toEqual(strStylish);
 });
 test('plain json', () => {
   expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'plain')).toEqual(strPlain);
+});
+test('json json', () => {
+  expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'json')).toEqual(JSON.parse(strJson));
 });
 
 test('stylish yaml', () => {
@@ -72,4 +76,7 @@ test('stylish yaml', () => {
 });
 test('plain yaml', () => {
   expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml', 'plain')).toEqual(strPlain);
+});
+test('json yaml', () => {
+  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml', 'json')).toEqual(JSON.parse(strJson));
 });
