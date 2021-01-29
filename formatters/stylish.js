@@ -13,7 +13,7 @@ function open(obj, tab) {
 }
 
 const map = {
-  changed: (nod, depth) => `  - ${nod.name}: ${open(nod.oldValue, depth + 1)}\n  ${'    '.repeat(depth)}+ ${nod.name}: ${open(nod.value, depth)}`,
+  changed: (nod, depth) => `  - ${nod.name}: ${open(nod.oldValue, depth + 1)}\n  ${'    '.repeat(depth)}+ ${nod.name}: ${open(nod.value, depth + 1)}`,
   added: (nod, depth) => `  + ${nod.name}: ${open(nod.value, depth + 1)}`,
   deleted: (nod, depth) => `  - ${nod.name}: ${open(nod.value, depth + 1)}`,
   unchanged: (nod, depth) => `    ${nod.name}: ${open(nod.value, depth + 1)}`,
