@@ -71,12 +71,12 @@ test('json json', () => {
   expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'json')).toEqual(JSON.parse(strJson));
 });
 
-test('stylish yaml', () => {
-  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml')).toEqual(strStylish);
+test('stylish yml', () => {
+  expect(genDiff('__fixtures__/file1.yml', '__fixtures__/file2.yml')).toEqual(strStylish);
 });
-test('plain yaml', () => {
-  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml', 'plain')).toEqual(strPlain);
+test('plain yml', () => {
+  expect(genDiff('__fixtures__/file1.yml', '__fixtures__/file2.yml', 'plain')).toEqual(strPlain);
 });
-test('json yaml', () => {
-  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml', 'json')).toEqual(JSON.parse(strJson));
+test('json yml', () => {
+  expect(genDiff('__fixtures__/file1.yml', '__fixtures__/file2.yml', 'json')).toEqual(JSON.parse(strJson));
 });
