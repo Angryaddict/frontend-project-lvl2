@@ -2,8 +2,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import { Command } from 'commander';
-import diff from '../src/diff.js';
-import stylish from '../src/formatters.js';
+import genDiff from '../index.js';
 
 const program = new Command();
 
@@ -14,9 +13,6 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
-    const options = program.opts();
-    if (options.format === 'stylish') {
-      console.log(stylish(diff(filepath1, filepath2)));
-    }
+    console.log(genDiff(filepath1, filepath2, program.opts().format));
   });
 program.parse();

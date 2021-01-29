@@ -7,7 +7,7 @@
     "transform": {}
   },
   "description": "[![Actions Status](https://github.com/Angryaddict/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/Angryaddict/frontend-project-lvl2/actions)",
-  "main": "gendiff.js",
+  "main": "index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },

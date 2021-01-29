@@ -39,6 +39,5 @@ export default function diff(filepath1, filepath2) {
     }, []);
     return result;
   }
-  const res = compare(o1, o2);
-  return res;
+  return compare(o1, o2);
 }

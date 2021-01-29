@@ -2,10 +2,21 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 
-import diff from '../src/diff.js';
-import stylish from '../src/formatters.js';
+import genDiff from '../index.js';
 
-const str = `{
+const strPlain = `Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to null
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From '' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]`;
+
+const strStylish = `{
     common: {
       + follow: false
         setting1: Value 1
@@ -49,10 +60,16 @@ const str = `{
         }
     }
 }`;
-test('diff json', () => {
-  expect(stylish(diff('__fixtures__/file1.json', '__fixtures__/file2.json'))).toEqual(str);
+test('stylish json', () => {
+  expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json')).toEqual(strStylish);
+});
+test('plain json', () => {
+  expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'plain')).toEqual(strPlain);
 });
 
-test('diff yaml', () => {
-  expect(stylish(diff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml'))).toEqual(str);
+test('stylish yaml', () => {
+  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml')).toEqual(strStylish);
+});
+test('plain yaml', () => {
+  expect(genDiff('__fixtures__/file1.yaml', '__fixtures__/file2.yaml', 'plain')).toEqual(strPlain);
 });
